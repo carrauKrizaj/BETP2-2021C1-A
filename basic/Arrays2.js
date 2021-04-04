@@ -40,3 +40,18 @@ printInventor(inventors.getInventors().sort((a,b) => a.year - b.year ));
 // Ejercicio componer un arrar de inventores que tenga una propiedad que sea Nombre y Apellido junto, NombreCompleto
 // Tip usar un .map
 
+/* FUNCION NOMBRE COMPLETO */
+const nombreCompleto = (a,b) => a+' '+b;
+
+console.log('');
+
+/* NUEVO ARRAY */
+const nuevoArray = inventors.getInventors()
+    .map(inventor =>
+        ({nombreCompleto:nombreCompleto(inventor.first,inventor.last), year:inventor.year})
+    );
+
+/* TEST */
+    console.log('Nombre Completo               Año');
+    console.log('---------------------------------');    
+    nuevoArray.forEach(inventor => console.log(`${inventor.nombreCompleto.padEnd(30,' ')}${inventor.year}`));
