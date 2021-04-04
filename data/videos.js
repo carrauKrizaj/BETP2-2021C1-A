@@ -24,5 +24,20 @@ const str = `<ul>
 // Desarrollar una funcion que me devuelva el total de segundos de los videos de tipo Redux
 // Transformar la cadena en objetos que pueda trabajar con los metodos vistos hasta ahora.
 
+const limpiaCadena = (cadena) => {
+  return cadena.replace(/<li data-time="/gi,'').replace(/ul>/gi,'').replace(/li>/gi,'').replace(/</gi,'').replace(/">/gi,';');
+};
 
+const generaArray = (cadena) => {
+  return cadena.split('/');
+};
 
+//console.log(limpiaCadena(str));
+
+generaArray(limpiaCadena(str)).forEach(element => {
+  if(element.includes('Redux')) {
+    element-replace(/;Redux Video/gi,'');
+        
+    console.log(element);
+  };  
+});
