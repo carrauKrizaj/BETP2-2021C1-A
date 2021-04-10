@@ -19,3 +19,54 @@ const beers = [
     { name: 'Belgian Wit', abv: 5.4, label: 'https://s3.amazonaws.com/brewerydbapi/beer/3CvVQG/upload_xOMnlK-large.png', type: 'Wheat' },
     { name: 'Stolen Fruit', abv: 4.6, label: 'https://s3.amazonaws.com/brewerydbapi/beer/YGT30k/upload_uVCHP7-large.png', type: 'Wheat' },
   ];
+
+ /* SOLUCION */ 
+
+ //1)
+
+ function calculaPrecio (abv,name){
+  const amarga = 5;
+  const oferta = 'Purple Iris';
+  let precio = 300;
+  if(abv >= amarga) {precio = 350};
+  if(name === oferta) {precio = 320};
+  return precio;
+ }
+
+ function beersConPrecio(beerArr){
+    return beerArr
+            .map(beer => ({
+              name: beer.name,
+              abv: beer.abv,
+              label: beer.label,
+              type: beer.type,
+              precio: calculaPrecio(beer.abv,beer.name)
+            }));
+ };
+
+//test 1: console.log(beersConPrecio(beers));
+
+//2)
+
+function addFileName(beerArr){
+    return beerArr
+        .map(beer => ({
+          name: beer.name,
+          abv: beer.abv,
+          label: beer.label,
+          type: beer.type,
+          precio: beer.precio,
+          file_name: beer.label.split('/').pop()
+        }));
+};
+
+//test2: console.log(addFileName(beersConPrecio(beers)));
+
+//3)
+
+function ordernarPorTipo(beerArr){
+  return beerArr.sort((a,b) => (a.type < b.type) ? 1:-1);
+};
+
+//lo ordeno a la inversa para probar que funcione
+//test3: console.log(ordernarPorTipo(addFileName(beersConPrecio(beers))));
