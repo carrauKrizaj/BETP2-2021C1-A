@@ -62,4 +62,27 @@ function getTotalSegundos2(videos, tipo){
 console.log(getTotalSegundos2(getObjects(str), 'Flexbox Video'));
 
 // VOLVEMOS 9:35!!
+function getObjects(cadena) {
+  return cadena
+            .replace('<ul>','')
+            .replace('</ul>','')
+            .split('</li>')
+            .slice(0,-1)
+            .map(video => ({
+              min: parseInt(video.split('"')[1].split(':')[0]),
+              seg: parseInt(video.split('"')[1].split(':')[1]),
+              tipo: video.split('>')[1]
+            }))
+};
 
+function sumatoriaSegundos(videos,tipoVideo){
+  let totalSegundos = 0;
+  videos
+      .filter(video => video.tipo === tipoVideo)
+      .forEach(video => {
+        totalSegundos += video.min * 60 + video.seg;
+      });
+      return totalSegundos;
+}
+
+console.log(sumatoriaSegundos(getObjects(str),'Redux Video'));
